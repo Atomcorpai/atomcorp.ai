@@ -951,7 +951,7 @@ async function sendGateMessage() {
     const res = await fetch(GATEWAY + '/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: msg })
+      body: JSON.stringify({ prompt: msg })
     });
     const data = await res.json();
     thinking.remove();
