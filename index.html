@@ -931,7 +931,7 @@ const GATEWAY = 'https://z1-system-atomcorpai.up.railway.app';
 
 async function sendGateMessage() {
   const input = document.getElementById('gateInput');
-  const output = document.getElementById('gateOutput');
+  const output = document.getElementById('consoleOutput');
   const msg = input.value.trim();
   if (!msg) return;
   input.value = '';
@@ -1048,4 +1048,4 @@ async function handleEmail() {
 }
 </script>
 </body>
-</html>      
+</html>
