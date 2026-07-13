@@ -730,17 +730,6 @@
     </div>
   </div>
 
-  <div id="gateTerminal" class="gate-terminal" style="display:none;">
-    <div class="gate-output" id="gateOutput">
-      <span class="log-line log-system">// Z1 RUNTIME ACTIVE — atomcorp gateway</span>
-    </div>
-    <div class="gate-input-row">
-      <span class="gate-prompt-char">›</span>
-      <input type="text" id="gateInput" class="gate-input" placeholder="enter prompt..." autocomplete="off" spellcheck="false">
-      <button class="gate-send" onclick="sendGateMessage()">⏎</button>
-    </div>
-  </div>
-
   <h1 class="factory-title">AtomCorp</h1>
   <p class="factory-subtitle">
     Reusable Runtime Infrastructure
@@ -845,6 +834,11 @@ Persistent state, deterministic execution, context silos, and reusable runtime i
       <span class="console-label">Z1_RUNTIME // GOVERNANCE ACTIVE</span>
     </div>
     <div class="console-content" id="consoleOutput"></div>
+    <div class="gate-input-row" style="margin-top:16px; border-top:1px solid rgba(26,92,42,0.4); padding-top:10px;">
+      <span class="gate-prompt-char" style="color:var(--green-bright);">›</span>
+      <input type="text" id="gateInput" class="gate-input" placeholder="enter prompt..." autocomplete="off" spellcheck="false">
+      <button class="gate-send" onclick="sendGateMessage()">⏎</button>
+    </div>
   </div>
 </section>
 
@@ -930,17 +924,7 @@ document.getElementById('factoryDoor').addEventListener('click', () => {
   document.getElementById('doorLeft').classList.toggle('open', doorOpen);
   document.getElementById('doorRight').classList.toggle('open', doorOpen);
   document.getElementById('doorInterior').classList.toggle('visible', doorOpen);
-  const terminal = document.getElementById('gateTerminal');
-  if (doorOpen) {
-    setTimeout(() => { terminal.style.display = 'block'; terminal.style.opacity = '1'; }, 700);
-  } else {
-    terminal.style.display = 'none';
-  }
-});
 
-// Show terminal on initial load (door opens automatically)
-window.addEventListener('load', () => {
-  setTimeout(() => { document.getElementById('gateTerminal').style.display = 'block'; }, 1600);
 });
 
 const GATEWAY = 'https://z1-system-atomcorpai.up.railway.app';
@@ -1064,9 +1048,4 @@ async function handleEmail() {
 }
 </script>
 </body>
-</html>
-  if (!val || !val.includes('@')) return;
-  try {
-    const res = await fetch('https://formspree.io/f/mpqeqojw', {
-      method: 'POST',
-      
+</html>      
