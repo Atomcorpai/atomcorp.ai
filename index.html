@@ -867,7 +867,7 @@
   }
 
   /* Candy rain */
-  .candy-rain-layer { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+  .candy-rain-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
   .rain-candy {
     position: absolute;
     top: -60px;
@@ -1067,7 +1067,7 @@ Your AI should remember you. Z1 does.
       <div class="silo-core"></div>
       <div class="silo-name">Can Say I Don't Know</div>
       <div class="silo-hint">click to open</div>
-      <div class="silo-detail">Rather than being helpful and giving the wrong answer, Z1 is smart enough to just tell you it doesn't know.</div>
+      <div class="silo-detail">Most agents will confidently give you a wrong answer before they'll admit they don't know. Z1 says it doesn't know. Then it tells you why. Then it remembers that you asked — so next time there's context to work with, it doesn't have to guess.</div>
     </div>
   </div>
 </section>
@@ -1307,7 +1307,7 @@ for (let i = 0; i < 22; i++) {
 /* Candy rain */
 const candyRainLayer = document.getElementById('candyRainLayer');
 const CANDY_EMOJI = ['🍬', '🍭', '🍫', '🧁'];
-for (let i = 0; i < 74; i++) {
+for (let i = 0; i < 39; i++) {
   const c = document.createElement('div');
   c.className = 'rain-candy';
   c.textContent = CANDY_EMOJI[Math.floor(Math.random() * CANDY_EMOJI.length)];
