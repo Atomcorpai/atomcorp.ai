@@ -110,7 +110,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 60px 20px;
+    padding: 95px 20px 60px;
     z-index: 10;
     background:
       radial-gradient(ellipse at 50% 0%, rgba(90,30,140,0.3) 0%, transparent 60%),
@@ -635,19 +635,61 @@
   }
   .remember-input::placeholder { color: var(--text-dim); font-style: italic; }
   .remember-input:focus { border-color: var(--purple-bright); box-shadow: inset 0 0 14px rgba(90,30,140,0.2), 0 0 20px rgba(139,63,216,0.25); }
-  .remember-output {
-    margin-top: 20px;
-    font-family: 'WolyWonka', monospace;
-    font-size: 0.8rem;
-    color: var(--green-bright);
-    min-height: 20px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .remember-output.visible { opacity: 1; }
-  .remember-output .filing { display: inline-block; animation: file-away 0.6s ease; }
-  .remember-output .filing.signature { color: var(--gold-bright); font-style: italic; }
   @keyframes file-away { 0% { opacity: 0; transform: translateY(6px) scale(0.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  .chat-thread {
+    max-height: 280px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) transparent;
+  }
+  .chat-thread::-webkit-scrollbar { width: 6px; }
+  .chat-thread::-webkit-scrollbar-track { background: transparent; }
+  .chat-thread::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+  .chat-empty {
+    font-family: 'WolyWonka', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .chat-msg {
+    font-family: 'WolyWonka', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    padding: 10px 16px;
+    border-radius: 8px;
+    max-width: 82%;
+    animation: file-away 0.4s ease;
+  }
+  .chat-msg-user {
+    align-self: flex-end;
+    background: rgba(212,160,23,0.1);
+    border: 1px solid var(--gold-dim);
+    color: var(--text);
+  }
+  .chat-msg-reply {
+    align-self: flex-start;
+    background: rgba(139,63,216,0.14);
+    border: 1px solid var(--purple-bright);
+    color: var(--green-bright);
+  }
+  .chat-msg-reply.signature { color: var(--gold-bright); font-style: italic; }
+  .remember-hint {
+    font-family: 'WolyWonka', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 14px;
+    opacity: 0.75;
+    font-style: italic;
+  }
   .remember-frame.signature-pulse { animation: signature-pulse 2.2s ease; }
   @keyframes signature-pulse {
     0%, 100% { box-shadow: inset 0 0 0 1px rgba(212,160,23,0.15), 0 0 50px rgba(90,30,140,0.2); border-color: var(--gold-dim); }
@@ -696,6 +738,8 @@
     text-transform: uppercase;
     color: var(--text-dim);
   }
+  .elevator-shaft.single-stop { justify-content: center; padding-top: 4px; }
+  .elevator-shaft.single-stop::before { display: none; }
   .glass-elevator {
     position: fixed;
     z-index: 500;
@@ -829,7 +873,7 @@
   <a href="#" class="nav-brand">⚛ AtomCorp</a>
   <ul class="nav-links">
     <li><a href="#silos">Silos</a></li>
-    <li><a href="#compare">vs. RAG / MCP</a></li>
+    <li><a href="#compare">vs. Everyone Else</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -896,8 +940,8 @@ Your AI should remember you. Z1 does.
 
 <section>
   <div class="principle-block reveal">
-    <div class="principle-text">The Model Proposes. Python Disposes.</div>
-    <div class="principle-sub">// Memory, reflection, and compression run in deterministic code — so the model just reasons, and never has to remember to remember.</div>
+    <div class="principle-text">The Everlasting Context.</div>
+    <div class="principle-sub">// Other agents forget you when the window closes. Z1 doesn't have a window.</div>
   </div>
 </section>
 
@@ -943,29 +987,20 @@ Your AI should remember you. Z1 does.
     <svg class="remember-gear remember-gear-tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#d4a017" d="M43.3,5.4l-3.5,9.6c-2.3,0.7-4.5,1.7-6.5,2.9l-9.9-3L16,22.3l5.5,8.6c-0.9,2.1-1.5,4.4-1.8,6.7L10,42l0,7.9l9.7,3.5c0.7,2.3,1.7,4.5,2.9,6.5L19.4,70l7.4,7.4l8.6-5.5c2.1,0.9,4.4,1.5,6.7,1.8L46,82.9H54l3.5-9.7c2.3-0.7,4.5-1.7,6.5-2.9l10.3,3.2l7.4-7.4l-5.5-8.6c0.9-2.1,1.5-4.4,1.8-6.7L87,46v-8h0l-9.7-3.5c-0.7-2.3-1.7-4.5-2.9-6.5l3.2-10.3l-7.4-7.4l-8.6,5.5c-2.1-0.9-4.4-1.5-6.7-1.8L51.9,5H43.3zM50,30c11,0,20,9,20,20s-9,20-20,20s-20-9-20-20S39,30,50,30z"/></svg>
     <svg class="remember-gear remember-gear-br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#8a6a0a" d="M43.3,5.4l-3.5,9.6c-2.3,0.7-4.5,1.7-6.5,2.9l-9.9-3L16,22.3l5.5,8.6c-0.9,2.1-1.5,4.4-1.8,6.7L10,42l0,7.9l9.7,3.5c0.7,2.3,1.7,4.5,2.9,6.5L19.4,70l7.4,7.4l8.6-5.5c2.1,0.9,4.4,1.5,6.7,1.8L46,82.9H54l3.5-9.7c2.3-0.7,4.5-1.7,6.5-2.9l10.3,3.2l7.4-7.4l-5.5-8.6c0.9-2.1,1.5-4.4,1.8-6.7L87,46v-8h0l-9.7-3.5c-0.7-2.3-1.7-4.5-2.9-6.5l3.2-10.3l-7.4-7.4l-8.6,5.5c-2.1-0.9-4.4-1.5-6.7-1.8L51.9,5H43.3zM50,30c11,0,20,9,20,20s-9,20-20,20s-20-9-20-20S39,30,50,30z"/></svg>
     <div class="remember-label">⚙ Speak, and it Will Keep</div>
+    <div class="chat-thread" id="chatThread">
+      <div class="chat-empty" id="chatEmpty">// nothing sealed yet — say something.</div>
+    </div>
     <div class="remember-box">
       <div class="remember-input-row">
         <input type="text" class="remember-input" id="rememberInput" placeholder="say something it will remember" maxlength="140">
         <button class="btn-primary" id="rememberSubmit" type="button">⚙ Seal It</button>
       </div>
-      <div class="remember-output" id="rememberOutput"></div>
+      <div class="remember-hint">One of several silos — it knows where the rest of your context belongs.</div>
     </div>
-    <div class="elevator-shaft">
-      <div class="shaft-stop" data-silo="operational" id="stop-operational">
+    <div class="elevator-shaft single-stop">
+      <div class="shaft-stop" id="stop-sealed">
         <div class="shaft-dot"></div>
-        <div class="shaft-label">Operational</div>
-      </div>
-      <div class="shaft-stop" data-silo="relational" id="stop-relational">
-        <div class="shaft-dot"></div>
-        <div class="shaft-label">Relational</div>
-      </div>
-      <div class="shaft-stop" data-silo="domain" id="stop-domain">
-        <div class="shaft-dot"></div>
-        <div class="shaft-label">Domain</div>
-      </div>
-      <div class="shaft-stop" data-silo="situational" id="stop-situational">
-        <div class="shaft-dot"></div>
-        <div class="shaft-label">Situational</div>
+        <div class="shaft-label">Sealed</div>
       </div>
     </div>
   </div>
@@ -987,23 +1022,21 @@ Your AI should remember you. Z1 does.
 
 <section id="compare">
   <div class="section-header reveal">
-    <div class="section-title">vs. RAG &amp; MCP</div>
+    <div class="section-title">Z1 vs. ChatGPT vs. Everyone Else</div>
     <div class="divider"></div>
   </div>
   <div class="reveal" style="overflow-x:auto;">
     <table class="compare-table">
       <thead>
-        <tr><th>Capability</th><th>RAG</th><th>MCP</th><th>Z1 / AtomCorp</th></tr>
+        <tr><th>Capability</th><th>ChatGPT</th><th>Every Other Agent</th><th>Z1 / AtomCorp</th></tr>
       </thead>
       <tbody>
-        <tr><td>Cross-session memory</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Persistent across sessions</td></tr>
-        <tr><td>Categorized context silos</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Not one giant blob</td></tr>
-        <tr><td>Provenance tracking</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Every write logged</td></tr>
-        <tr><td>Deterministic compression &amp; reflection</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Runs off the model</td></tr>
-        <tr><td>Token efficiency at scale</td><td>Degrades</td><td>Very Low</td><td><span class="check">Improves</span></td></tr>
-        <tr><td>Local / offline operation</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Zero cloud dependency</td></tr>
-        <tr><td>Plug into MCP / your own tools</td><td><span class="cross">✗</span></td><td>Partial</td><td><span class="check">✓</span> Framework-agnostic runtime</td></tr>
-        <tr><td>Built-in safety net</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Present, quietly</td></tr>
+        <tr><td>Remembers you between sessions</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Every time</td></tr>
+        <tr><td>What happens when the window closes</td><td>Gone</td><td>Gone</td><td><span class="check">✓</span> Still there</td></tr>
+        <tr><td>Re-explaining yourself</td><td>Every session</td><td>Every session</td><td><span class="check">✓</span> Never</td></tr>
+        <tr><td>Categorized memory, not one blob</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span> Silos, not soup</td></tr>
+        <tr><td>You own it if you leave</td><td>Unclear</td><td>Unclear</td><td><span class="check">✓</span> Yours. Always.</td></tr>
+        <tr><td>Cost as history grows</td><td>Rises</td><td>Rises</td><td><span class="check">✓</span> Stays flat</td></tr>
       </tbody>
     </table>
   </div>
@@ -1077,7 +1110,7 @@ const lines = [
   { text: '[AUDIT_COORDINATOR] Silo audit complete. No flags raised.', cls: 'log-pass', delay: 2600 },
   { text: '[TARPIT_DETECTOR] No loop detected. Counter: 0/threshold.', cls: 'log-info', delay: 3000 },
   { text: '[SYSTEM] Combined eval score: 96.6%', cls: 'log-system', delay: 3400 },
-  { text: '// The model proposed. Python disposed. All clear.', cls: 'log-quote', delay: 3800 },
+  { text: '// Sealed. Nothing lost. All clear.', cls: 'log-quote', delay: 3800 },
   { text: '> _', cls: 'log-info', delay: 4200 },
 ];
 
@@ -1168,13 +1201,23 @@ document.addEventListener('click', () => {
 });
 
 /* It remembers */
-const REMEMBER_SILOS = ['OPERATIONAL', 'RELATIONAL', 'DOMAIN', 'SITUATIONAL'];
 const SIGNATURE_PHRASE = 'remember me';
 const SIGNATURE_LINE = "this one isn't filed in a silo. it just stays — a small mark left by whoever built this, so there'd be something here to find.";
 const rememberInput = document.getElementById('rememberInput');
-const rememberOutput = document.getElementById('rememberOutput');
 const rememberSubmit = document.getElementById('rememberSubmit');
 const rememberFrame = document.querySelector('.remember-frame');
+const chatThread = document.getElementById('chatThread');
+
+function appendChatMessage(role, text) {
+  const empty = document.getElementById('chatEmpty');
+  if (empty) empty.remove();
+  const msg = document.createElement('div');
+  msg.className = 'chat-msg ' + (role === 'user' ? 'chat-msg-user' : 'chat-msg-reply');
+  msg.textContent = text;
+  chatThread.appendChild(msg);
+  chatThread.scrollTop = chatThread.scrollHeight;
+  return msg;
+}
 
 function injectMemory(text) {
   const ticker = document.querySelector('.memory-ticker');
@@ -1206,8 +1249,8 @@ function spawnPoof(x, y) {
 }
 
 const ELEVATOR_FLIGHT_MS = 1150;
-function flyToSilo(siloKey, onArrive) {
-  const stop = document.getElementById('stop-' + siloKey);
+function flyToSilo(onArrive) {
+  const stop = document.getElementById('stop-sealed');
   const dot = stop.querySelector('.shaft-dot');
   const inputRect = rememberInput.getBoundingClientRect();
   const dotRect = dot.getBoundingClientRect();
@@ -1236,23 +1279,14 @@ function flyToSilo(siloKey, onArrive) {
   }, ELEVATOR_FLIGHT_MS);
 }
 
-const SILO_STOP_KEYS = { OPERATIONAL: 'operational', RELATIONAL: 'relational', DOMAIN: 'domain', SITUATIONAL: 'situational' };
 const CHAT_ENDPOINT = 'https://z1-system-atomcorpai.up.railway.app/chat';
-
-function escapeHtml(str) {
-  const d = document.createElement('div');
-  d.textContent = str;
-  return d.innerHTML;
-}
 
 function submitRemember() {
   const val = rememberInput.value.trim();
   if (!val) return;
   const isSignature = val.toLowerCase().includes(SIGNATURE_PHRASE);
-  const silo = isSignature ? 'RELATIONAL' : REMEMBER_SILOS[Math.floor(Math.random() * REMEMBER_SILOS.length)];
-  rememberOutput.classList.remove('visible');
-  rememberOutput.innerHTML = '';
   rememberInput.value = '';
+  appendChatMessage('user', val);
 
   let chatPromise = null;
   if (!isSignature) {
@@ -1264,21 +1298,21 @@ function submitRemember() {
     }).then(r => r.json()).catch(() => null);
   }
 
-  flyToSilo(SILO_STOP_KEYS[silo], async () => {
+  flyToSilo(async () => {
     if (isSignature) {
-      rememberOutput.innerHTML = '<span class="filing signature">// ' + SIGNATURE_LINE + '</span>';
+      const bubble = appendChatMessage('reply', SIGNATURE_LINE);
+      bubble.classList.add('signature');
       rememberFrame.classList.remove('signature-pulse');
       void rememberFrame.offsetWidth;
       rememberFrame.classList.add('signature-pulse');
-      rememberOutput.classList.add('visible');
       injectMemory(SIGNATURE_LINE);
     } else {
-      rememberOutput.innerHTML = '<span class="filing">// listening…</span>';
-      rememberOutput.classList.add('visible');
+      const bubble = appendChatMessage('reply', 'sealed into memory — listening…');
       injectMemory('you said: ' + val);
       const data = await chatPromise;
       const reply = (data && typeof data.response === 'string') ? data.response : 'connection lost — try again in a moment.';
-      rememberOutput.innerHTML = '<span class="filing">// ' + escapeHtml(reply) + '</span>';
+      bubble.textContent = reply;
+      chatThread.scrollTop = chatThread.scrollHeight;
       rememberSubmit.disabled = false;
     }
   });
