@@ -570,8 +570,76 @@
     transition: max-height 0.4s ease, margin-top 0.4s ease;
     margin-top: 0;
   }
-  .silo.open .silo-detail { max-height: 260px; margin-top: 16px; }
+  .silo.open .silo-detail { max-height: 900px; margin-top: 16px; }
   .silo.open { border-color: var(--purple-bright); }
+
+  /* Live agent — the star of the page */
+  .live-marquee {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    background: repeating-linear-gradient(45deg, var(--gold) 0px, var(--gold) 22px, #0d0a1a 22px, #0d0a1a 44px);
+    padding: 10px 0;
+    margin-bottom: 50px;
+    border-top: 2px solid var(--bg-dark);
+    border-bottom: 2px solid var(--bg-dark);
+  }
+  .live-marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee-scroll 16s linear infinite;
+  }
+  .live-marquee-track span {
+    font-family: 'WolyWonka', serif;
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: var(--bg-dark);
+    letter-spacing: 0.04em;
+    padding: 0 40px;
+  }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .live-badge {
+    display: block;
+    width: fit-content;
+    margin: -30px auto 20px;
+    padding: 10px 24px;
+    background: #1a0000;
+    border: 2px solid #ff3b3b;
+    border-radius: 30px;
+    color: #ff5c5c;
+    font-family: 'WolyWonka', monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    animation: live-badge-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes live-badge-pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,59,59,0.45); }
+    50% { box-shadow: 0 0 28px rgba(255,59,59,0.95); }
+  }
+  .live-arrow-down {
+    font-family: 'WolyWonka', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--gold-bright);
+    text-align: center;
+    margin-bottom: 18px;
+    animation: arrow-bounce 1.2s ease-in-out infinite;
+  }
+  @keyframes arrow-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  .chat-thread-label {
+    font-family: 'WolyWonka', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
 
   /* It remembers */
   .remember-frame {
@@ -888,7 +956,7 @@
 <nav>
   <a href="#" class="nav-brand">⚛ AtomCorp</a>
   <ul class="nav-links">
-    <li><a href="#silos">Silos</a></li>
+    <li><a href="#silos">Features</a></li>
     <li><a href="#compare">vs. Everyone Else</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -919,7 +987,7 @@
 
   <h1 class="factory-title">AtomCorp</h1>
   <p class="factory-subtitle">
-    Reusable Runtime Infrastructure
+    The Everlasting Context.
     </p>
   <p class="factory-tagline">
 Your AI should remember you. Z1 does.
@@ -962,46 +1030,68 @@ Your AI should remember you. Z1 does.
 
 <section id="silos">
   <div class="section-header reveal">
-    <div class="section-title">Inside the Silos</div>
+    <div class="section-title">Inside the Factory</div>
     <div class="divider"></div>
   </div>
   <div class="silo-grid reveal">
-    <div class="silo" data-silo="operational">
+    <div class="silo" data-feature="never-forgets">
       <div class="silo-core"></div>
-      <div class="silo-name">Operational</div>
+      <div class="silo-name">Never Forgets</div>
       <div class="silo-hint">click to open</div>
-      <div class="silo-detail">Day-to-day working state — current tasks, recent actions, what's in motion right now. Short memory, high turnover, always current.</div>
+      <div class="silo-detail">Close the window. Shut it down. Walk away. When you come back, it's exactly where you left it. The context doesn't expire. The memory doesn't reset. The factory never closes.</div>
     </div>
-    <div class="silo" data-silo="relational">
+    <div class="silo" data-feature="unlimited-silos">
       <div class="silo-core"></div>
-      <div class="silo-name">Relational</div>
+      <div class="silo-name">Unlimited Silos</div>
       <div class="silo-hint">click to open</div>
-      <div class="silo-detail">Who you are to it. Preferences, tone, the shape of how you like to work. The part that makes it feel like it knows you.</div>
+      <div class="silo-detail">One silo for work. One for research. One for whatever you're building at 2am. Add as many as you need — each one routes itself, compresses itself, and stays out of the others' way. Your tools get their own rooms.</div>
     </div>
-    <div class="silo" data-silo="domain">
+    <div class="silo" data-feature="no-context-window">
       <div class="silo-core"></div>
-      <div class="silo-name">Domain</div>
+      <div class="silo-name">No Context Window</div>
       <div class="silo-hint">click to open</div>
-      <div class="silo-detail">Durable facts about your world — projects, terminology, structure. Slow to change. Fast to recall.</div>
+      <div class="silo-detail">Every other AI has a window. When it fills up, the oldest stuff falls out. Z1 doesn't have a window. It has a reservoir. History compresses, context persists, and nothing gets lost because there was no room.</div>
     </div>
-    <div class="silo" data-silo="situational">
+    <div class="silo" data-feature="runs-itself">
       <div class="silo-core"></div>
-      <div class="silo-name">Situational</div>
+      <div class="silo-name">Runs Itself</div>
       <div class="silo-hint">click to open</div>
-      <div class="silo-detail">The moment. What just happened, what's happening now, what's likely next. Short half-life, high relevance while it lasts.</div>
+      <div class="silo-detail">Context routes automatically. Memory compresses on its own. The silo decides where things belong. You and the model focus on the conversation. The factory handles the rest.</div>
+    </div>
+    <div class="silo" data-feature="built-for-more">
+      <div class="silo-core"></div>
+      <div class="silo-name">Built for More</div>
+      <div class="silo-hint">click to open</div>
+      <div class="silo-detail">
+        The factory has a back room. Cryptographic signing on every action. An automatic audit ledger that logs every output, every decision, every turn — tamper-evident and queryable. Governance rules that actually enforce. Tarpits that catch loops before they cost you. Custom silo architecture for your specific context domains. All of these are built and ready to implement now. If you're building something serious and need the whole stack, talk to us.
+        <a href="#contact" class="btn-primary" style="margin-top:14px;">⚙ Talk to Us</a>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="remembers">
+  <div class="live-marquee">
+    <div class="live-marquee-track">
+      <span>⚡ THIS IS A LIVE, WORKING AI AGENT ⚡</span>
+      <span>👉 NOT A DEMO. NOT A MOCKUP. THE ACTUAL PRODUCT. 👈</span>
+      <span>🎪 STEP RIGHT UP AND TALK TO IT 🎪</span>
+      <span>⚡ THIS IS A LIVE, WORKING AI AGENT ⚡</span>
+      <span>👉 NOT A DEMO. NOT A MOCKUP. THE ACTUAL PRODUCT. 👈</span>
+      <span>🎪 STEP RIGHT UP AND TALK TO IT 🎪</span>
+    </div>
+  </div>
   <div class="section-header reveal">
     <div class="section-title">It Remembers</div>
     <div class="divider"></div>
   </div>
+  <div class="live-badge reveal">🔴 LIVE — REAL AGENT, REAL MEMORY</div>
   <div class="remember-frame reveal">
     <svg class="remember-gear remember-gear-tl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#d4a017" d="M43.3,5.4l-3.5,9.6c-2.3,0.7-4.5,1.7-6.5,2.9l-9.9-3L16,22.3l5.5,8.6c-0.9,2.1-1.5,4.4-1.8,6.7L10,42l0,7.9l9.7,3.5c0.7,2.3,1.7,4.5,2.9,6.5L19.4,70l7.4,7.4l8.6-5.5c2.1,0.9,4.4,1.5,6.7,1.8L46,82.9H54l3.5-9.7c2.3-0.7,4.5-1.7,6.5-2.9l10.3,3.2l7.4-7.4l-5.5-8.6c0.9-2.1,1.5-4.4,1.8-6.7L87,46v-8h0l-9.7-3.5c-0.7-2.3-1.7-4.5-2.9-6.5l3.2-10.3l-7.4-7.4l-8.6,5.5c-2.1-0.9-4.4-1.5-6.7-1.8L51.9,5H43.3zM50,30c11,0,20,9,20,20s-9,20-20,20s-20-9-20-20S39,30,50,30z"/></svg>
     <svg class="remember-gear remember-gear-br" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#8a6a0a" d="M43.3,5.4l-3.5,9.6c-2.3,0.7-4.5,1.7-6.5,2.9l-9.9-3L16,22.3l5.5,8.6c-0.9,2.1-1.5,4.4-1.8,6.7L10,42l0,7.9l9.7,3.5c0.7,2.3,1.7,4.5,2.9,6.5L19.4,70l7.4,7.4l8.6-5.5c2.1,0.9,4.4,1.5,6.7,1.8L46,82.9H54l3.5-9.7c2.3-0.7,4.5-1.7,6.5-2.9l10.3,3.2l7.4-7.4l-5.5-8.6c0.9-2.1,1.5-4.4,1.8-6.7L87,46v-8h0l-9.7-3.5c-0.7-2.3-1.7-4.5-2.9-6.5l3.2-10.3l-7.4-7.4l-8.6,5.5c-2.1-0.9-4.4-1.5-6.7-1.8L51.9,5H43.3zM50,30c11,0,20,9,20,20s-9,20-20,20s-20-9-20-20S39,30,50,30z"/></svg>
     <div class="remember-label">⚙ Speak, and it Will Keep</div>
+    <div class="live-arrow-down">👇 THIS TALKS BACK FOR REAL — TRY IT 👇</div>
+    <div class="chat-thread-label">// your last 20 — saved right here, even if you close the tab</div>
     <div class="chat-thread" id="chatThread">
       <div class="chat-empty" id="chatEmpty">// nothing sealed yet — say something.</div>
     </div>
@@ -1094,6 +1184,9 @@ Your AI should remember you. Z1 does.
     <a href="tel:+16232175306">623-217-5306</a>
     &nbsp;·&nbsp;
     <a href="https://linkedin.com/in/AdamDolin6" target="_blank">LinkedIn</a>
+  </div>
+  <div style="margin-top:18px; font-size:0.7rem; opacity:0.6; max-width:640px; margin-left:auto; margin-right:auto; line-height:1.5;">
+    This material is based upon work supported by the U.S. National Science Foundation under Grant No. 2220959. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the U.S. National Science Foundation.
   </div>
 </footer>
 
@@ -1257,6 +1350,29 @@ function appendChatMessage(role, text) {
   return msg;
 }
 
+const CHAT_HISTORY_KEY = 'z1_chat_history';
+const CHAT_HISTORY_LIMIT = 20;
+
+function loadChatHistory() {
+  try {
+    const raw = localStorage.getItem(CHAT_HISTORY_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+let chatHistory = loadChatHistory();
+
+function recordHistory(role, text) {
+  chatHistory.push({ role, text });
+  chatHistory = chatHistory.slice(-CHAT_HISTORY_LIMIT);
+  try { localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(chatHistory)); } catch (e) {}
+}
+
+chatHistory.forEach(m => appendChatMessage(m.role, m.text));
+
 function injectMemory(text) {
   const ticker = document.querySelector('.memory-ticker');
   if (!ticker) return;
@@ -1325,6 +1441,7 @@ function submitRemember() {
   const isSignature = val.toLowerCase().includes(SIGNATURE_PHRASE);
   rememberInput.value = '';
   appendChatMessage('user', val);
+  recordHistory('user', val);
 
   let chatPromise = null;
   if (!isSignature) {
@@ -1344,6 +1461,7 @@ function submitRemember() {
       void rememberFrame.offsetWidth;
       rememberFrame.classList.add('signature-pulse');
       injectMemory(SIGNATURE_LINE);
+      recordHistory('reply', SIGNATURE_LINE);
     } else {
       const bubble = appendChatMessage('reply', 'sealed into memory — listening…');
       injectMemory('you said: ' + val);
@@ -1351,6 +1469,7 @@ function submitRemember() {
       const reply = (data && typeof data.response === 'string') ? data.response : 'connection lost — try again in a moment.';
       bubble.textContent = reply;
       chatThread.scrollTop = chatThread.scrollHeight;
+      recordHistory('reply', reply);
       rememberSubmit.disabled = false;
     }
   });
