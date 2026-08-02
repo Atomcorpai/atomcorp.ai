@@ -450,6 +450,20 @@
   }
   .founder-quote { font-family: 'ChocolateFactory', 'Cinzel Decorative', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--gold-bright); font-style: italic; margin-bottom: 16px; }
   .founder-name { font-family: 'WolyWonka', monospace; font-size: 1.05rem; color: var(--text-dim); letter-spacing: 0.1em; }
+  .data-promise {
+    font-family: 'ChocolateFactory', 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    font-weight: 900;
+    color: var(--green-bright);
+    text-shadow: 0 0 24px rgba(45,158,74,0.6);
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+    animation: data-promise-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes data-promise-pulse {
+    0%, 100% { text-shadow: 0 0 24px rgba(45,158,74,0.6); }
+    50% { text-shadow: 0 0 40px rgba(45,158,74,0.95), 0 0 14px rgba(255,255,255,0.3); }
+  }
 
   footer {
     text-align: center;
@@ -1150,6 +1164,7 @@ Your AI should remember you. Z1 does.
 </section>
 
 <div class="founder-strip reveal">
+  <div class="data-promise">I DON'T WANT YOUR DATA! KEEP IT.</div>
   <div class="founder-quote">"They're trying to pour the ocean through a cup. I built the reservoir."</div>
   <div class="founder-name">— Adam Dolin, Founder · NSF REACH Scholar · adam@atomcorp.ai · 623-217-5306</div>
 </div>
