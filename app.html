@@ -152,9 +152,62 @@
   @media (max-width: 720px) {
     .sidebar { display: none; }
   }
+
+  #gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--bg-dark);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #gate-box {
+    background: var(--bg-mid);
+    border: 1px solid rgba(212,160,23,0.25);
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 340px;
+    display: flex; flex-direction: column; gap: 20px;
+    text-align: center;
+  }
+  #gate-logo { font-size: 1.4rem; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; }
+  #gate-sub { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+  #gate-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    font-family: inherit;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  #gate-input:focus { border-color: var(--gold); }
+  #gate-btn {
+    padding: 12px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  #gate-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,160,23,0.3); }
+  #gate-err { font-size: 0.8rem; color: #e05a5a; min-height: 1.1em; }
 </style>
 </head>
 <body>
+
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-logo">⚛ AtomCorp — Z1</div>
+    <div id="gate-sub">This demo environment is restricted.<br>Enter access credentials to continue.</div>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <div id="gate-err"></div>
+    <button id="gate-btn" type="button">Enter</button>
+  </div>
+</div>
 
 <div class="topbar">
   <div class="topbar-brand"><span class="mark">⚛</span> AtomCorp — Z1</div>
@@ -183,6 +236,30 @@
 </div>
 
 <script>
+(function() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gate-input');
+  const btn = document.getElementById('gate-btn');
+  const err = document.getElementById('gate-err');
+  const PW = atob('QEJhbmFuYXNwbGl0NDck');
+
+  if (sessionStorage.getItem('z1_auth') === '1') { gate.remove(); return; }
+
+  function attempt() {
+    if (input.value === PW) {
+      sessionStorage.setItem('z1_auth', '1');
+      gate.remove();
+    } else {
+      err.textContent = 'Access denied.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  btn.addEventListener('click', attempt);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') attempt(); });
+})();
+
 const CHAT_ENDPOINT = 'https://z1-system-atomcorpai-c2dc.up.railway.app/chat';
 const chatScroll = document.getElementById('chatScroll');
 const chatInput = document.getElementById('chatInput');
